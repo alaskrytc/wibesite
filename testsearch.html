@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Style the search bar */
+        #search-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #search-bar {
+            padding: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <input type="text" id="search-bar" placeholder="Enter a word to search for...">
+        <button onclick="searchAndSelectWord()">Search and Select</button>
+    </div>
+
+    <!-- Content of your webpage -->
+    <div class="content">
+        <p>This is some content on your webpage. You can include text, images, and more. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi nam dicta provident quo, perferendis inventore id odit, atque voluptates nihil consectetur quam repellat architecto. Aliquam officia quam amet nihil. Cum, reiciendis eligendi? Odio aliquam libero ipsa odit animi rerum sapiente minima eveniet, facere, natus quo quod incidunt doloremque corrupti exercitationem deserunt omnis earum iure possimus repudiandae consequuntur debitis nostrum? Tenetur nam debitis dolorem doloremque asperiores ut quisquam et illum soluta consequuntur voluptatem mollitia at consectetur ullam est nobis, voluptates facilis velit recusandae sint quo eos impedit perferendis? Nesciunt expedita necessitatibus quos hic. Suscipit, quam sit unde porro sequi architecto optio.</p>
+    </div>
+
+
+    <!-- More content -->
+
+    <script>
+        function searchAndSelectWord() {
+            const searchWord = document.getElementById("search-bar").value.toLowerCase();
+            const content = document.querySelector(".content");
+            const contentText = content.textContent.toLowerCase();
+            
+            if (contentText.includes(searchWord)) {
+                const contentHTML = content.innerHTML;
+                const searchRegexp = new RegExp(searchWord, 'g');
+                content.innerHTML = contentHTML.replace(searchRegexp, match => `<span class="selected">${match}</span>`);
+                
+                const selectedWords = content.querySelectorAll(".selected");
+                if (selectedWords.length > 0) {
+                    selectedWords[0].scrollIntoView({ behavior: "smooth", block: "center" });
+                    selectedWords[0].focus();
+                }
+            } else {
+                alert(`The word "${searchWord}" was not found on the page.`);
+            }
+        }
+    </script>
+</body>
+</html>
